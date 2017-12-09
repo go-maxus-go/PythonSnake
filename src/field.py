@@ -1,5 +1,7 @@
 # Map of the field
 
+from src.point import *
+
 class CellType(enumerate):
     Empty = 0
     Wall = 1
@@ -20,5 +22,7 @@ class Field:
     def height(self):
         return self.__height
 
-    def cell(self, x, y):
-        return self.__data[y * self.__width + x]
+    def cell(self, point):
+        if type(point) != Point2D:
+            raise "Point2D type is required"
+        return self.__data[point.y * self.__width + point.x]

@@ -20,24 +20,23 @@ class TestField(unittest.TestCase):
     def test_data(self):
         for x in range(self.field.width() - 1):
             for y in range(self.field.height() - 1):
-                self.assertEqual(self.field.cell(x, y), CellType.Empty)
+                self.assertEqual(self.field.cell(Point2D(x, y)), CellType.Empty)
 
     def test_customData(self):
-        self.assertEqual(self.customField.cell(0, 0), CellType.Wall)
-        self.assertEqual(self.customField.cell(1, 0), CellType.Wall)
-        self.assertEqual(self.customField.cell(2, 0), CellType.Wall)
-        self.assertEqual(self.customField.cell(3, 0), CellType.Wall)
+        self.assertEqual(self.customField.cell(Point2D(0, 0)), CellType.Wall)
+        self.assertEqual(self.customField.cell(Point2D(1, 0)), CellType.Wall)
+        self.assertEqual(self.customField.cell(Point2D(2, 0)), CellType.Wall)
+        self.assertEqual(self.customField.cell(Point2D(3, 0)), CellType.Wall)
 
-        self.assertEqual(self.customField.cell(0, 1), CellType.Wall)
-        self.assertEqual(self.customField.cell(1, 1), CellType.Empty)
-        self.assertEqual(self.customField.cell(2, 1), CellType.Empty)
-        self.assertEqual(self.customField.cell(3, 1), CellType.Wall)
+        self.assertEqual(self.customField.cell(Point2D(0, 1)), CellType.Wall)
+        self.assertEqual(self.customField.cell(Point2D(1, 1)), CellType.Empty)
+        self.assertEqual(self.customField.cell(Point2D(2, 1)), CellType.Empty)
+        self.assertEqual(self.customField.cell(Point2D(3, 1)), CellType.Wall)
 
-        self.assertEqual(self.customField.cell(0, 2), CellType.Wall)
-        self.assertEqual(self.customField.cell(1, 2), CellType.Wall)
-        self.assertEqual(self.customField.cell(2, 2), CellType.Wall)
-        self.assertEqual(self.customField.cell(3, 2), CellType.Wall)
-
+        self.assertEqual(self.customField.cell(Point2D(0, 2)), CellType.Wall)
+        self.assertEqual(self.customField.cell(Point2D(1, 2)), CellType.Wall)
+        self.assertEqual(self.customField.cell(Point2D(2, 2)), CellType.Wall)
+        self.assertEqual(self.customField.cell(Point2D(3, 2)), CellType.Wall)
 
 def suite():
     suite = unittest.TestSuite()
