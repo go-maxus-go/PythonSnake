@@ -78,6 +78,9 @@ class Engine:
         if not snake1 and not snake2:
             self.__state = State.SuddenDeath
 
+        print(self.getParams(0))
+        #print(self.getParams(1))
+
         return self.state()
 
     def checkSnake(self, snake, opponent):
@@ -102,3 +105,55 @@ class Engine:
             text += str + '\n'
         return text
 
+    def checkCell(self, point: Point2D):
+        if self.__field.cell(point) == CellType.Wall:
+            return True
+        for snake in self.__snakes:
+            for i in range(snake.size()):
+                if snake.pos(i) == point:
+                    return True
+        return False
+
+    def adjustCellCoordinates(self, point: Point2D):
+        while point.x < 0:
+            point.x += self.__field.width()
+        while point.y < 0:
+            point.y += self.__field.height()
+        while point.x >= self.__field.width():
+            point.x -= self.__field.width()
+        while point.y >= self.__field.height():
+            point.y -= self.__field.height()
+        return point
+
+    def getParams(self, index: int):
+        snake = self.__snakes[index]
+        head = snake.head()
+        result = [head.x, head.y]
+
+        if snake.direction() == Direction.Up:
+            result += [self.checkCell(self.adjustCellCoordinates(Point2D(head.x - 1, head.y)))]
+            result += [self.checkCell(self.adjustCellCoordinates(Point2D(head.x - 1, head.y - 1)))]
+            result += [self.checkCell(self.adjustCellCoordinates(Point2D(head.x, head.y - 1)))]
+            result += [self.checkCell(self.adjustCellCoordinates(Point2D(head.x + 1, head.y - 1)))]
+            result += [self.checkCell(self.adjustCellCoordinates(Point2D(head.x + 1, head.y)))]
+        if snake.direction() == Direction.Right:
+            result += [self.checkCell(self.adjustCellCoordinates(Point2D(head.x, head.y - 1)))]
+            result += [self.checkCell(self.adjustCellCoordinates(Point2D(head.x + 1, head.y - 1)))]
+            result += [self.checkCell(self.adjustCellCoordinates(Point2D(head.x + 1, head.y)))]
+            result += [self.checkCell(self.adjustCellCoordinates(Point2D(head.x + 1, head.y + 1)))]
+            result += [self.checkCell(self.adjustCellCoordinates(Point2D(head.x, head.y + 1)))]
+        if snake.direction() == Direction.Down:
+            result += [self.checkCell(self.adjustCellCoordinates(Point2D(head.x + 1, head.y)))]
+            result += [self.checkCell(self.adjustCellCoordinates(Point2D(head.x + 1, head.y + 1)))]
+            result += [self.checkCell(self.adjustCellCoordinates(Point2D(head.x, head.y + 1)))]
+            result += [self.checkCell(self.adjustCellCoordinates(Point2D(head.x - 1, head.y + 1)))]
+            result += [self.checkCell(self.adjustCellCoordinates(Point2D(head.x - 1, head.y)))]
+        if snake.direction() == Direction.Left:
+            result += [self.checkCell(self.adjustCellCoordinates(Point2D(head.x, head.y + 1)))]
+            result += [self.checkCell(self.adjustCellCoordinates(Point2D(head.x - 1, head.y + 1)))]
+            result += [self.checkCell(self.adjustCellCoordinates(Point2D(head.x - 1, head.y)))]
+            result += [self.checkCell(self.adjustCellCoordinates(Point2D(head.x - 1, head.y - 1)))]
+            result += [self.checkCell(self.adjustCellCoordinates(Point2D(head.x, head.y - 1)))]
+
+        result += [self.apple().x, self.apple().y]
+        return result
