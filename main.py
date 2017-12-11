@@ -1,5 +1,11 @@
-from src.engine import *
+import sys
+from src.mainwnd import *
+from PyQt5.QtWidgets import QApplication
 
 if __name__ == '__main__':
-    engine = Engine(10, 10, 5)
-    engine.start()
+    app = QApplication(sys.argv)
+
+    wnd = MainWnd()
+    wnd.show()
+
+    sys.exit(app.exec_())
