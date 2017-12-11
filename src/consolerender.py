@@ -26,7 +26,7 @@ class ConsoleRender:
                     data += Codes.Wall
 
         for apple in self.__apples:
-            data[self.__field.width() * apple.y() + apple.x()] = Codes.Apple
+            data[self.__field.width() * apple.y + apple.x] = Codes.Apple
 
         for snake in self.__snakes:
             for i in range(snake.size()):
