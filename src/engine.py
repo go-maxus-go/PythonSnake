@@ -7,7 +7,7 @@ from src.snake import *
 from src.consolerender import *
 
 class Engine:
-    def __init__(self, width, height, snakeSize, interval = .500):
+    def __init__(self, width: int, height: int, snakeSize: int, interval = .500):
         self.__interval = interval # time delay between loops
         self.__field = Field(width, height)
         # fill snake's data

@@ -12,7 +12,7 @@ class TestConsoleRender(unittest.TestCase):
                                   0,0,0,0,0])
         self.snakes = [Snake(self.field, Direction.Left, [Point2D(0, 0), Point2D(1, 0), Point2D(2, 0)]),
                        Snake(self.field, Direction.Right, [Point2D(2, 4), Point2D(1, 4), Point2D(0, 4)])]
-        self.apples = [Apple(3, 3), Apple(2, 2)]
+        self.apples = [Point2D(3, 3), Point2D(2, 2)]
         self.render = ConsoleRender(self.field, self.snakes, self.apples)
 
     def test_render(self):

@@ -1,4 +1,3 @@
-from src.apple import *
 from src.field import *
 from src.snake import *
 
