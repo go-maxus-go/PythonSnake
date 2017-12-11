@@ -78,9 +78,6 @@ class Engine:
         if not snake1 and not snake2:
             self.__state = State.SuddenDeath
 
-        print(self.getParams(0))
-        #print(self.getParams(1))
-
         return self.state()
 
     def checkSnake(self, snake, opponent):
