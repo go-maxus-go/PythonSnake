@@ -19,10 +19,10 @@ class Engine:
 
         data1 = []
         for i in range(self.__snakeSize):
-            data1.append(Point2D(self.__snakeSize - i - 1, 0))
+            data1.append(Point2D(self.__snakeSize - i - 1, 2))
         data2 = []
         for i in range(self.__field.width() - self.__snakeSize, self.__field.width()):
-            data2.append(Point2D(i, self.__field.height() - 1))
+            data2.append(Point2D(i, self.__field.height() - 3))
         self.__snakes = [Snake(self.__field, Direction.Right, data1),
                          Snake(self.__field, Direction.Left, data2)]
 
