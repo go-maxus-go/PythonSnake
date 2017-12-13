@@ -4,8 +4,8 @@ from PyQt5.QtWidgets import QApplication
 from src.mainwnd import *
 
 if __name__ == '__main__':
-    genCount = 10
-    snakeCount = 40
+    genCount = 5
+    snakeCount = 16
     snakesAi = []
     engine = Engine()
     for i in range(snakeCount):
@@ -32,6 +32,11 @@ if __name__ == '__main__':
                 newGeneration += [snakeAi1]
             elif state == State.Player2Win:
                 newGeneration += [snakeAi2]
+            elif engine.snake(0).size() != engine.snake(1).size():
+                if engine.snake(0).size() > engine.snake(1).size():
+                    newGeneration += [snakeAi1]
+                else:
+                    newGeneration += [snakeAi2]
             else:
                 snakesAi += [NeuronNetwork(engine.field().width() * engine.field().height(), 4)]
                 snakesAi += [NeuronNetwork(engine.field().width() * engine.field().height(), 4)]
