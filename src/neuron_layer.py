@@ -11,3 +11,18 @@ class NeuronLayer:
         for neuron in self.__neurons:
             res += [neuron.calculate(data)]
         return res
+
+    def neurons(self):
+        return self.__neurons
+
+    def setNeurons(self, neurons):
+        self.__neurons = neurons
+
+    def makeChild(self, layer):
+        neurons = []
+        for i in range(len(self.__neurons)):
+            neurons += [self.__neurons[i].makeChild(layer.neurons()[i])]
+        layer = NeuronLayer(0, 0)
+        layer.setNeurons(neurons)
+        return layer
+
