@@ -1,34 +1,11 @@
 from src.engine import *
-
-import math
-import random
-
-
-class Neuron:
-    def __init__(self, inputCount: int, outputCount: int):
-        self.__inputWeights = []
-        for i in range(inputCount):
-            self.__inputWeights += [random.random()]
-        self.__outputWeights = []
-        for i in range(outputCount):
-            self.__outputWeights += [random.random()]
-
-    def calculate(self, data):
-        res = 0
-        for i in range(len(self.__inputWeights)):
-            res += self.__inputWeights[i] * data[i] / 4 # normalization
-        res = 1 / (1 + math.exp(-res))
-
-        output = []
-        for weight in self.__outputWeights:
-            output += [weight * res]
-
-        return output
+from src.neuron_network import *
 
 class Bot:
     def __init__(self, engine: Engine, index = 1):
         self.__engine = engine
         self.__index = index
+        self.__ai = NeuronNetwork(engine.field().width() * engine.field().height(), 4)
 
     def index(self):
         return self.__index
@@ -48,15 +25,20 @@ class Bot:
             for i in range(snake.size()):
                 pos = snake.pos(i)
                 if index == self.__index:
-                    data[pos.x + pos.y * w] = 3 # Own snake
+                    if i == 0:
+                        data[pos.x + pos.y * w] = 3 # Own head
+                    else:
+                        data[pos.x + pos.y * w] = 4 # Own snake
                 else:
-                    data[pos.x + pos.y * w] = 4 # Enemy snake
+                    if i == 0:
+                        data[pos.x + pos.y * w] = 5 # Enemy head
+                    else:
+                        data[pos.x + pos.y * w] = 6 # Enemy snake
 
         return self.calculateDirection(data)
 
     def calculateDirection(self, data):
-        neuron = Neuron(len(data), 4)
-        res = neuron.calculate(data)
+        res = self.__ai.calculate(data)
         index = res.index(max(res))
         if index == 0:
             return Direction.Up
