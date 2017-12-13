@@ -6,12 +6,11 @@ import pickle
 class NeuronNetwork:
     def __init__(self, inputCount: int, outputCount: int):
         self.__fname = 'gen/state.txt'
-        neuronCount = inputCount
+        neuronCount = int(inputCount / 5)
         self.__layers = [NeuronLayer(inputCount, neuronCount),
                          NeuronLayer(neuronCount, int(neuronCount / 2)),
                          NeuronLayer(int(neuronCount / 2), int(neuronCount / 4)),
-                         NeuronLayer(int(neuronCount / 4), int(neuronCount / 10)),
-                         NeuronLayer(int(neuronCount / 10), outputCount)]
+                         NeuronLayer(int(neuronCount / 4), outputCount)]
 
     def calculate(self, data):
         res = copy.deepcopy(data)

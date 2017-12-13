@@ -2,10 +2,11 @@ from src.engine import *
 from src.neuron_network import *
 
 class Bot:
-    def __init__(self, engine: Engine, index = 1):
+    def __init__(self, engine: Engine, ai: NeuronNetwork, index = 1):
         self.__engine = engine
         self.__index = index
-        self.__ai = NeuronNetwork(engine.field().width() * engine.field().height(), 4)
+        self.__ai = ai
+        #self.__ai = NeuronNetwork(engine.field().width() * engine.field().height(), 4)
 
     def index(self):
         return self.__index

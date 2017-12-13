@@ -11,7 +11,8 @@ class Neuron:
         res = 0
         for i in range(len(self.__weights)):
             res += self.__weights[i] * data[i]
-        return 1 / (1 + math.exp(-res))
+        res = 1 / (1 + math.exp(-res))
+        return res
 
     def weights(self):
         return self.__weights

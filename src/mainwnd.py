@@ -9,6 +9,7 @@ from src.snake import *
 from src.engine import *
 from src.consolerender import *
 from src.bot import *
+from src.neuron_network import *
 
 class MainWnd(QLabel):
     def __init__(self, parent = None):
@@ -17,7 +18,9 @@ class MainWnd(QLabel):
         self.setFont(QFont("Courier", 20))
 
         self.__engine = Engine()
-        self.__bot = Bot(self.__engine)
+        neuronNetwork = NeuronNetwork(0, 0)
+        neuronNetwork.load()
+        self.__bot = Bot(self.__engine, neuronNetwork)
 
         self.__timer = QTimer()
         self.__timer.setInterval(500)
