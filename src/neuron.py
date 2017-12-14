@@ -5,7 +5,7 @@ class Neuron:
     def __init__(self, inputCount: int):
         self.__weights = []
         for i in range(inputCount):
-            self.__weights += [random.random()]
+            self.__weights += [(random.random() * 2 - 1) / 1000]
 
     def calculate(self, data):
         res = 0

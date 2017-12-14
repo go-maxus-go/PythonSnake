@@ -6,7 +6,7 @@ class Bot:
         self.__engine = engine
         self.__index = index
         self.__ai = ai
-        #self.__ai = NeuronNetwork(engine.field().width() * engine.field().height(), 4)
+        self.__ai = NeuronNetwork(engine.field().width() * engine.field().height(), 4)
 
     def index(self):
         return self.__index
@@ -19,27 +19,40 @@ class Bot:
             for x in range(w):
                 data += [self.__engine.field().cell(Point2D(x, y))]
 
-        apple = self.__engine.apple()
-        data[apple.x + apple.y * w] = 2 # apple
+        #apple = self.__engine.apple()
+        #data[apple.x + apple.y * w] = 2 # apple
         for index in range(2):
             snake = self.__engine.snake(index)
             for i in range(snake.size()):
                 pos = snake.pos(i)
-                if index == self.__index:
-                    if i == 0:
-                        data[pos.x + pos.y * w] = 3 # Own head
-                    else:
-                        data[pos.x + pos.y * w] = 4 # Own snake
-                else:
-                    if i == 0:
-                        data[pos.x + pos.y * w] = 5 # Enemy head
-                    else:
-                        data[pos.x + pos.y * w] = 6 # Enemy snake
+                data[pos.x + pos.y * w] = CellType.Wall # Own head
+#               if index == self.__index:
+#                   if i == 0:
+#                       data[pos.x + pos.y * w] = 3 # Own head
+#                   else:
+#                       data[pos.x + pos.y * w] = 4 # Own snake
+#               else:
+#                   if i == 0:
+#                       data[pos.x + pos.y * w] = 5 # Enemy head
+#                   else:
+#                       data[pos.x + pos.y * w] = 6 # Enemy snake
+        head = self.__engine.snake(self.__index).pos(0)
+        data += [head.x, head.y]
+
+        oppIndex = 0
+        if oppIndex == self.__index:
+            oppIndex = 1
+        head = self.__engine.snake(oppIndex).pos(0)
+        data += [head.x, head.y]
+
+        apple = self.__engine.apple()
+        data += [apple.x, apple.y]
 
         return self.calculateDirection(data)
 
     def calculateDirection(self, data):
         res = self.__ai.calculate(data)
+        print(res)
         index = res.index(max(res))
         if index == 0:
             return Direction.Up
