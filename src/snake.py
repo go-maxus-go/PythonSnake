@@ -33,6 +33,9 @@ class Snake:
     def pos(self, index):
         return copy.copy(self.__data[index])
 
+    def isInCell(self, point: Point2D):
+        return point in self.__data
+
     def setApple(self):
         if not self.__apples or self.__apples[-1] != self.head():
             self.__apples.append(self.head())

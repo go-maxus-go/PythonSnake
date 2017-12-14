@@ -1,7 +1,8 @@
-from src.neuron_layer import *
-
 import copy
 import pickle
+
+from src.ai.neuron_layer import *
+
 
 class NeuronNetwork:
     def __init__(self, inputCount: int, outputCount: int):

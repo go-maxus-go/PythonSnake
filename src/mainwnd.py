@@ -1,15 +1,11 @@
-from PyQt5.QtWidgets import QLabel
-from PyQt5.QtGui import QKeyEvent, QFont
-from PyQt5.QtCore import QTimer
 from PyQt5 import QtCore
+from PyQt5.QtCore import QTimer
+from PyQt5.QtGui import QKeyEvent, QFont
+from PyQt5.QtWidgets import QLabel
 
-from src.point import *
-from src.field import *
-from src.snake import *
-from src.engine import *
-from src.consolerender import *
+from src.ai.neuron_network import *
 from src.bot import *
-from src.neuron_network import *
+
 
 class MainWnd(QLabel):
     def __init__(self, parent = None):
@@ -18,9 +14,9 @@ class MainWnd(QLabel):
         self.setFont(QFont("Courier", 20))
 
         self.__engine = Engine()
-        neuronNetwork = NeuronNetwork(0, 0)
-        neuronNetwork.load()
-        self.__bot = Bot(self.__engine, neuronNetwork)
+        #neuronNetwork = NeuronNetwork(0, 0)
+        #neuronNetwork.load()
+        self.__bot = Bot(self.__engine)
 
         self.__timer = QTimer()
         self.__timer.setInterval(500)

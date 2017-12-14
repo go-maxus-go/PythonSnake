@@ -1,5 +1,5 @@
-from src.neuron import *
-from typing import List
+from src.ai.neuron import *
+
 
 class NeuronLayer:
     def __init__(self, inputCount: int, neuronCount: int):
