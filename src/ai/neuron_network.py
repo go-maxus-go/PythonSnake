@@ -7,12 +7,11 @@ from src.ai.neuron_layer import *
 class NeuronNetwork:
     def __init__(self, inputCount: int, outputCount: int):
         self.__fname = 'gen/state.txt'
-        self.__layers = [NeuronLayer(4, 4)]
+        self.__layers = [NeuronLayer(inputCount, inputCount * 3),
+                         NeuronLayer(inputCount * 3, outputCount)]
 
     def calculate(self, data):
         res = copy.deepcopy(data)
-        for i in range(len(res)):
-            res[i] = res[i] / 10
         for layer in self.__layers:
             res = layer.calculate(res)
         return res

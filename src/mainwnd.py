@@ -16,7 +16,7 @@ class MainWnd(QLabel):
         self.__engine = Engine()
         #neuronNetwork = NeuronNetwork(0, 0)
         #neuronNetwork.load()
-        self.__bot = Bot(self.__engine)
+        self.__bot = Bot(self.__engine, 1, NeuronNetwork(8, 4))
 
         self.__timer = QTimer()
         self.__timer.setInterval(500)
