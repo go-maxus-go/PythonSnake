@@ -39,7 +39,7 @@ class Engine:
     def apple(self):
         return copy.copy(self.__apple)
 
-    def snake(self, index):
+    def snake(self, index: int):
         return copy.copy(self.__snakes[index])
 
     def setSnakeDirection(self, index: int, direction: Direction):

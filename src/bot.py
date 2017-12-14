@@ -100,7 +100,6 @@ class Bot:
             return self.__engine.snake(self.__index).direction()
 
         res = self.__ai.calculate(data)
-        print(res)
         index = res.index(max(res))
         if index == 0:
             return Direction.Up
